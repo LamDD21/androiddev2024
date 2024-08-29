@@ -3,9 +3,8 @@ package vn.edu.usth.weather;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.fragment.app.FragmentManager;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -16,14 +15,14 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate is called");
 
-//        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
 
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
+        // Create a new instance of ForecastFragment
+        ForecastFragment forecastFragment = new ForecastFragment();
+
+        // Add the fragment to the 'container' FrameLayout using dynamic code
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.main, forecastFragment).commit();
     }
 
     @Override
