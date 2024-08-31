@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +66,25 @@ public class ForecastFragment extends Fragment {
         View view = new View(getContext());
         view.setBackgroundColor(0xff3374ff);
 
-        return view;
+        LinearLayout linearLayout = new LinearLayout(view.getContext());
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+
+        TextView day = new TextView(getContext());
+        day.setText("Monday");
+
+
+        ImageView img = new ImageView(getContext());
+        img.setImageResource(R.drawable.slight_drizzle);
+
+
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.addView(day);
+        linearLayout.addView(img);
+        linearLayout.addView(view);
+
+
+        return linearLayout;
 
     }
 }
