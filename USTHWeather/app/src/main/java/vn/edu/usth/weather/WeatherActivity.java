@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
 public class WeatherActivity extends AppCompatActivity {
 
     private static final String TAG = "WeatherActivity";
-
+    private DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +19,15 @@ public class WeatherActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_weather);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Create a new instance of ForecastFragment
         ForecastFragment forecastFragment = new ForecastFragment();
 
         // Add the fragment to the 'container' FrameLayout using dynamic code
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.main, forecastFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.fragment_forecast, forecastFragment).commit();
     }
 
     @Override

@@ -6,44 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ForecastFragment"
-    android:background="#FBFBFB"
+    android:background="#FAF7F7"
     tools:ignore="ExtraText">
-
-
-    <!-- Header layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="#062EFF"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <!-- Title TextView -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"
-            android:text="USTH Weather"
-            android:fontFamily="@font/VAGRB"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- Settings button -->
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="Refresh"
-            android:src="@drawable/refresh" />
-
-        <!-- Refresh button -->
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:contentDescription="Settings"
-            android:src="@drawable/settings" />
-    </LinearLayout>
 
     <!-- Weather forecast -->
     <LinearLayout
@@ -66,7 +30,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/VAGRB"
                 android:gravity="center_vertical"
                 android:text="Monday"
                 android:textColor="#FDFBFB"
@@ -85,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Partly Cloudy\n24C - 31C"
                 android:textColor="#FDFBFB"
@@ -105,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Tuesday"
                 android:textColor="#FDFBFB" />
@@ -123,7 +84,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Sunny\n27C - 35C"
                 android:textColor="#FDFBFB"
@@ -143,7 +103,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Wednesday"
                 android:textColor="#FDFBFB" />
@@ -161,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Rain\n18C - 20C"
                 android:textColor="#FDFBFB"
@@ -181,7 +139,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Thursday"
                 android:textColor="#FDFBFB" />
@@ -199,7 +156,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Showers\n22C - 23C"
                 android:textColor="#FDFBFB"
@@ -219,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Friday"
                 android:textColor="#FDFBFB" />
@@ -237,7 +192,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Mostly Cloudy\n22C - 25C"
                 android:textColor="#FDFBFB"
@@ -257,7 +211,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Saturday"
                 android:textColor="#FDFBFB" />
@@ -275,7 +228,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:gravity="center_vertical"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:text="Partly Cloudy\n24C - 31C"
                 android:textColor="#FDFBFB"
@@ -296,7 +248,6 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="Sunday"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic"
                 android:textColor="#FDFBFB" />
 
@@ -316,7 +267,6 @@
                 android:text="Rain\n22C - 23C"
                 android:textColor="#FDFBFB"
                 android:textSize="14sp"
-                android:fontFamily="@font/VAGRB"
                 android:textStyle="italic" />
         </LinearLayout>
 
