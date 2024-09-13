@@ -24,7 +24,7 @@ public class WeatherActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ViewPager viewPager = findViewById(R.id.viewpager);
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter;
+        viewPager.setAdapter(adapter);
     }
 
     @Override
