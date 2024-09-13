@@ -2,11 +2,12 @@ package vn.edu.usth.weather;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -21,14 +22,21 @@ public class WeatherActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Create a new instance of ForecastFragment
-        ForecastFragment forecastFragment = new ForecastFragment();
-
-        // Add the fragment to the 'container' FrameLayout using dynamic code
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.fragment_forecast, forecastFragment).commit();
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+
+
+
 
     @Override
     protected void onStart() {
