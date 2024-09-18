@@ -3,26 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
+    android:padding="20dp"
     android:layout_margin="25dp"
-    android:background="#7DAD7F">
+    android:background="@drawable/frame">
+
 
 
     <TextView
         android:id="@+id/text_temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="24C"
-        android:textSize="20sp"
-        android:textColor="@android:color/black" />
-
+        android:layout_margin="20dp"
+        android:text="  24C"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sunny"
+        android:text="    Sunny"
         android:layout_below="@id/text_temperature"
+
         android:textSize="18sp"
         android:textColor="@android:color/black" />
 
@@ -39,9 +41,10 @@
         android:id="@+id/text_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hà Nội"
         android:layout_alignParentRight="true"
-        android:textSize="14sp"
-        android:textColor="@android:color/black" />
+        android:layout_marginRight="38dp"
+        android:text="Hà Nội"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
 </RelativeLayout>
