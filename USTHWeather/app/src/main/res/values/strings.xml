@@ -1,8 +1,8 @@
 <resources>
 
-        <string name="app_name">USTH Weather</string>
-        <string name="hanoi_tab">Hanoi</string>
-        <string name="hcm_tab">Ho Chi Minh City</string>
-        <string name="danang_tab">Da Nang</string>
+    <string name="app_name">USTH Weather</string>
+    <string name="hanoi_tab">Hanoi</string>
+    <string name="hcm_tab">Ho Chi Minh City</string>
+    <string name="danang_tab">Da Nang</string>
 
 </resources>
