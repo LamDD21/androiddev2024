@@ -4,10 +4,11 @@
         android:id="@+id/action_refresh"
         android:title="Refresh"
         android:icon="@drawable/refresh_24"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
+        android:icon="@drawable/settings"
         app:showAsAction="never" />
 </menu>
