@@ -1,6 +1,7 @@
 package vn.edu.usth.weather;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -40,7 +41,7 @@ public class WeatherActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         MediaPlayer();
-        simulateNetworkRequest();
+        
 
 
 
@@ -100,7 +101,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-    private void simulateNetworkRequest() {
+
 
         final Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -112,26 +113,24 @@ public class WeatherActivity extends AppCompatActivity {
         };
 
 
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
+    private class NetworkTask extends AsyncTask<Void, Void, String> {
 
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
 
-
-                Bundle bundle = new Bundle();
-                bundle.putString("server_response", " Data retrieved");
-
-
-                Message msg = new Message();
-                msg.setData(bundle);
-                handler.sendMessage(msg);
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
-        thread.start();
+
+            return "Data refreshed!";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            Toast.makeText(WeatherActivity.this, result, Toast.LENGTH_SHORT).show();
+        }
     }
 }
