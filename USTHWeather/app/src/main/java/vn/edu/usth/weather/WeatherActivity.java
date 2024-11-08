@@ -22,13 +22,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class WeatherActivity extends AppCompatActivity {
-
+    private static final String TAG = "WeatherActivity";
+    private static final String USTH_LOGO_URL = "http://ict.usth.edu.vn/wp-content/uploads/usth/usthlogo.png";
     private MediaPlayer mediaPlayer;
     private Bitmap usthLogo;
+    private RequestQueue requestQueue;
 
 
     @Override
@@ -50,10 +61,37 @@ public class WeatherActivity extends AppCompatActivity {
 
         MediaPlayer();
 
-        new LogoDownloadTask().execute("http://ict.usth.edu.vn/wp-content/uploads/usth/usthlogo.png");
+        requestQueue = Volley.newRequestQueue(this);
+        downloadLogoWithVolley();
 
-
-
+        private void downloadLogoWithVolley() {
+            ImageRequest imageRequest = new ImageRequest(
+                    USTH_LOGO_URL,
+                    new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap bitmap) {
+                            if (bitmap != null) {
+                                usthLogo = bitmap;
+                                setAppBackground(bitmap);
+                            }
+                        }
+                    },
+                    0,
+                    0,
+                    ImageView.ScaleType.CENTER_CROP,
+                    Bitmap.Config.ARGB_8888,
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e(TAG, "Error downloading logo: " + error.getMessage());
+                            Toast.makeText(WeatherActivity.this,
+                                    "Failed to download logo",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            requestQueue.add(imageRequest);
+        }
 
     }
 
@@ -113,49 +151,14 @@ public class WeatherActivity extends AppCompatActivity {
 
 
 
-    private class LogoDownloadTask extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String urlDisplay = urls[0];
-            Bitmap logoBitmap = null;
-            try {
-                URL url = new URL(urlDisplay);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setDoInput(true);
-                connection.connect();
-
-                InputStream input = connection.getInputStream();
-                logoBitmap = BitmapFactory.decodeStream(input);
-                connection.disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return logoBitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (bitmap != null) {
-                usthLogo = bitmap; // Lưu logo vào biến toàn cục
-                setAppBackground(bitmap); // Đặt ảnh làm nền
-            } else {
-                Toast.makeText(WeatherActivity.this, "Failed to download logo", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    // Đặt ảnh làm nền
     private void setAppBackground(Bitmap bitmap) {
         ImageView backgroundLogo = findViewById(R.id.background_logo);
         if (backgroundLogo != null) {
             backgroundLogo.setImageBitmap(bitmap);
-            backgroundLogo.setAlpha(0.1f); // Điều chỉnh độ mờ để ảnh làm nền chìm
+            backgroundLogo.setAlpha(0.1f);
         }
     }
 
-    // Hàm lấy logo đã tải
     public Bitmap getUsthLogo() {
         return usthLogo;
     }
