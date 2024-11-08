@@ -1,6 +1,8 @@
 package vn.edu.usth.weather;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,17 +12,23 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class WeatherActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
+    private Bitmap usthLogo;
 
 
     @Override
@@ -41,7 +49,9 @@ public class WeatherActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         MediaPlayer();
-        
+
+        new LogoDownloadTask().execute("http://ict.usth.edu.vn/wp-content/uploads/usth/usthlogo.png");
+
 
 
 
@@ -103,34 +113,50 @@ public class WeatherActivity extends AppCompatActivity {
 
 
 
-        final Handler handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-
-                String content = msg.getData().getString("server_response");
-                Toast.makeText(WeatherActivity.this, content, Toast.LENGTH_SHORT).show();
-            }
-        };
-
-
-    private class NetworkTask extends AsyncTask<Void, Void, String> {
+    private class LogoDownloadTask extends AsyncTask<String, Void, Bitmap> {
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected Bitmap doInBackground(String... urls) {
+            String urlDisplay = urls[0];
+            Bitmap logoBitmap = null;
             try {
+                URL url = new URL(urlDisplay);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.connect();
 
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
+                InputStream input = connection.getInputStream();
+                logoBitmap = BitmapFactory.decodeStream(input);
+                connection.disconnect();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            return "Data refreshed!";
+            return logoBitmap;
         }
 
         @Override
-        protected void onPostExecute(String result) {
-
-            Toast.makeText(WeatherActivity.this, result, Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(Bitmap bitmap) {
+            if (bitmap != null) {
+                usthLogo = bitmap; // Lưu logo vào biến toàn cục
+                setAppBackground(bitmap); // Đặt ảnh làm nền
+            } else {
+                Toast.makeText(WeatherActivity.this, "Failed to download logo", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    // Đặt ảnh làm nền
+    private void setAppBackground(Bitmap bitmap) {
+        ImageView backgroundLogo = findViewById(R.id.background_logo);
+        if (backgroundLogo != null) {
+            backgroundLogo.setImageBitmap(bitmap);
+            backgroundLogo.setAlpha(0.1f); // Điều chỉnh độ mờ để ảnh làm nền chìm
+        }
+    }
+
+    // Hàm lấy logo đã tải
+    public Bitmap getUsthLogo() {
+        return usthLogo;
     }
 }
